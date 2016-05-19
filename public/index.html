@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="tigerApp">
+<head>
+  <title>tigerApp</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<!--<script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
+
+<input type="filepicker" data-fp-apikey="AoHr3MTuJSKSvxEwnAxvEz"
+       onchange="alert(event.fpfile.url)">-->
+<body>
+
+
+
+<div ui-view></div>
+<!--Socket IO-->
+
+<script src="http://localhost:3200/socket.io/socket.io.js"></script>
+
+<!-- JQuery, bootstrap -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!--Angular and dependencies -->
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js
+"></script>
+<script src="bower_components/filepicker-js/filepicker.js"></script>
+<script src="./bower_components/angular-filepicker/dist/angular_filepicker.js"></script>
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/angular-socket-io/socket.min.js"></script>
+
+<!-- client app folder -->
+<script src="app.js"></script>
+
+<!--Controllers, services, directives-->
+<script src="Main/MainCtrl.js"></script>
+<script src="Main/main.js"></script>
+<script src="account/login/login.controller.js"></script>
+<script src="account/settings/settings.controller.js"></script>
+<script src="account/signup/signup.controller.js"></script>
+<script src="account/account.js"></script>
+<script src="auth/auth.service.js"></script>
+<script src="auth/user.service.js"></script>
+<script src="products/products.controller.js"></script>
+<script src="products/products.service.js"></script>
+<script src="products/products.js"></script>
+<script src="admin/admin.controller.js"></script>
+<script src="admin/admin.js"></script>
+<script src="navbar/navbar.controller.js"></script>
+<script src="navbar/navbar.directive.js"></script>
+<script src="socket/socketFactory.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

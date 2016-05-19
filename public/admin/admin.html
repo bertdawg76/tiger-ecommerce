@@ -1,0 +1,148 @@
+<navbar></navbar>
+
+<h3>Admin page</h3>
+
+<h2>Please Add Product</h2>
+
+<!--<div class="row">
+  <div class="col-md-2">
+    <div ngf-select="uploadFiles($file)" ngf-drop="uploadFiles($file)" class="drop-box"
+         ngf-drag-over-class="dragover" ngf-multiple="true"
+         ngf-pattern="'image/*'" ngf-max-size="15MB" accept="image/*">Drop Images here or click to upload</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+    <button accept="image/*" ngf-max-size="15MB" type="file" class="btn btn-primary" ngf-select="uploadFiles($file)">Upload on file select</button>
+
+    <h2 ng-show="file">Preview</h2>
+    <img ngf-src="file" width="170px">
+    <div ng-show="file">{{file.name}} {{file.$error}} {{file.$errorParam}}</div>
+  </div>-->
+<div class="panel-body">
+<form novalidate>
+  <div class="col-md-10">
+    <div class="form-group">
+      <label for="title" class="col-sm-2 control-label">Title</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="product.title" class="form-control" id="title" placeholder="product title"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="product.description" class="form-control" id="description" placeholder="Describe your product..."/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label  class="col-sm-2 control-label">Price</label>
+      <div class="col-sm-10">
+        <input type="number" step="any" min="0" ng-model="product.price" class="form-control" id="price" placeholder="0.00"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label  class="col-sm-2 control-label">Price</label>
+      <div class="col-sm-10">
+        <input type="number" step="any" min="0" ng-model="product.stock" class="form-control" id="stock" placeholder="stock"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="picture">Main picture</label>
+      <div class="text-center">
+        <button type="button" class="btn btn-default" ng-click="upload()">
+          Upload <span class="caret"></span>
+        </button>
+        <div style="margin-top:10px;">
+          <!-- Show the thumbnail only when the picture is uploaded -->
+          <a href="{{product.picture.url}}" class="thumbnail" ng-if="product.picture">
+            <!-- the picture is rendered with width: 500 and sharpened -->
+            <img ng-src="{{product.picture.url | fpConvert: {filter:'sharpen', w:500} }}">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="picture">More pictures? (Max 3, optional!)</label>
+      <div class="text-center">
+        <button type="button" class="btn btn-default" ng-click="uploadMultiple()">
+          Upload <span class="caret"></span>
+        </button>
+        <!-- Show the thumbanil of more pictures -->
+        <div style="margin-top:10px;" ng-repeat="picture in product.morePictures">	 <div class="col-md-{{12 / product.morePictures.length}}">
+          <a href="{{picture.url}}" class="thumbnail">
+            <img ng-src="{{picture.url | fpConvert: {filter:'sharpen', w:500} }}">
+          </a>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary" ng-click="createItem(product)" value="Save">Submit</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+
+
+<div class="panel-body" ng-if="editStuff">
+  <h2>Edit Product</h2>
+  <form novalidate>
+    <div class="col-md-10">
+      <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="oneProduct.title" class="form-control" placeholder="product title"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input type="number" ng-model="oneProduct.price" class="form-control" placeholder="product price"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input type="number" ng-model="oneProduct.stock" class="form-control" placeholder="product stock"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="oneProduct.description" class="form-control" placeholder="product description"/>
+        </div>
+      </div>
+      <button class="btn btn-primary" role="button" ng-click="updateProduct(oneProduct)">submit</button>
+      </div>
+  </form>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <h1>Products</h1>
+      <p ng-show="items.length < 1">No products to show.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="product in admin.items">
+      <div class="thumbnail">
+        <img ng-src="{{product.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{product.title}}">
+        <div class="caption">
+          <h3>{{product.title}}</h3>
+          <p>Product Price: {{product.price | currency }}</p>
+          <p>Description: {{product.description | limitTo: 100}} ...</p>
+          <p>
+            <a ui-sref="viewProduct({id: product._id})" class="btn btn-default" role="button">Details</a>
+            <button class="btn btn-primary" role="button" ng-click="removeItem(product._id)">Delete</button>
+            <button class="btn btn-primary" role="button" ng-click="editProduct(product._id)">Edit</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
