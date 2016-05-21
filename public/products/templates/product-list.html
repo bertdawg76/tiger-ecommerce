@@ -17,7 +17,8 @@
           <h3>{{product.title}}</h3>
           <p>{{product.description | limitTo: 100}} ...</p>
           <p>
-            <a ui-sref="shoppingCart" class="btn btn-primary" role="button">Buy</a>
+            <ngcart-addtocart id="{{product._id}}" quantity="1" quantity-max="9"
+                              name="{{product.title}}" price="{{product.price}}" template-url="cart/cartTemplates/addtocart.html" data="product">Add to cart</ngcart-addtocart>
             <a ui-sref="viewProduct({id: product._id})" class="btn btn-default" role="button">Details</a>
           </p>
         </div>

@@ -52,4 +52,25 @@ angular.module('tigerApp')
               Product.updateProduct($scope.product);
               $state.go('products');
             }
-          });
+          })
+
+    .constant('clientTokenPath', '/api/braintree/client_token')
+
+    .controller('ProductCheckoutCtrl',
+        function($scope, $http, $state, ngCart){
+          $scope.errors = '';
+
+          $scope.paymentOptions = {
+            onPaymentMethodReceived: function(payload) {
+              angular.merge(payload, ngCart.toObject());
+              payload.total = payload.totalCost;
+              $http.post('/api/orders', payload)
+                  .then(function success () {
+                    ngCart.empty(true);
+                    $state.go('products');
+                  }, function error (res) {
+                    $scope.errors = res;
+                  });
+            }
+          };
+        });

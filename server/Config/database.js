@@ -12,3 +12,6 @@ mongoose.connection.on('connected', function(){
 
 require('../Models/user');
 require('../Models/product');
+require('../Models/order');
+require('../Models/braintree');
+

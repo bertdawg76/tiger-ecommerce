@@ -27,7 +27,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 require('./server/Models/user.js');
 require('./server/Models/product.js');
-
+require('./server/Models/braintree.js');
+require('./server/Models/order.js');
 
 
 //var routes = require('./server/Routes/index');

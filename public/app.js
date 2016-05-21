@@ -1,6 +1,6 @@
 
 
-angular.module('tigerApp', ['ui.router', 'btford.socket-io', 'angular-filepicker']);
+angular.module('tigerApp', ['ui.router', 'btford.socket-io', 'angular-filepicker', 'ngCart', 'braintree-angular']);
 
 angular.module('tigerApp').config(function($urlRouterProvider, $stateProvider, filepickerProvider) {
 
@@ -59,13 +59,26 @@ angular.module('tigerApp').config(function($urlRouterProvider, $stateProvider, f
         templateUrl: 'products/templates/product-edit.html',
         controller: 'ProductEditCtrl'
       })
-      .state('shoppingCart', {
-        url: '/cart/:id',
-        templateUrl: 'cart/cart.html',
-        controller: 'cartCtrl'
+      .state('checkout', {
+        url: '/checkout',
+        templateUrl: 'products/templates/product-checkout.html',
+        controller: 'ProductCheckoutCtrl'
       });
 
 
+});
+
+angular.module('tigerApp').run(function($rootScope, $state, Auth){
+  $rootScope.$on('$stateChangeStart', function(event, next){
+    if(next.authenticate){
+      Auth.isLoggedIn(function(loggedIn){
+        if(!loggedIn){
+          event.preventDefault();
+          $state.go('login');
+        }
+      })
+    }
+  })
 });
 
 

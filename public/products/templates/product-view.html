@@ -17,7 +17,8 @@
             </div>
           </div>
         <p>
-          <a href="#" class="btn btn-primary" role="button">Buy</a>
+          <ngcart-addtocart id="{{product.data._id}}" quantity="1" quantity-max="9"
+                            name="{{product.data.title}}" price="{{product.data.price}}" template-url="cart/cartTemplates/addtocart.html" data="product">Add to cart</ngcart-addtocart>
           <a ui-sref="products" class="btn btn-default" role="button">Back</a>
 
         </p>

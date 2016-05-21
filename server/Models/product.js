@@ -1,4 +1,3 @@
-var Category = require('./category');
 var mongoose = require('mongoose');
 
 
@@ -9,8 +8,7 @@ var ProductSchema = new mongoose.Schema({
   morePictures: mongoose.Schema.Types.Mixed,
   price: { type: Number, required: true, min: 0 },
   stock: { type: Number, default: 1, min: 0 },
-  createdAt: {type: Date, default: Date.now},
-  category: Category.categorySchema
+  createdAt: {type: Date, default: Date.now}
 });
 
 ProductSchema.pre('save', function(next){
