@@ -1,12 +1,9 @@
 var express = require('express');
 var jwt = require('express-jwt');
 var passport = require('passport');
-var multiparty = require('connect-multiparty');
 
-var uploadOptions = {
-  autoFile: true,
-  uploadDir: 'public/assets/uploads'
-};
+
+
 
 var router = express.Router();
 /*var auth = jwt({
@@ -20,7 +17,7 @@ var ctrlAuth = require('../controllers/authentication');
 var ctrlProduct = require('../controllers/productCtrl');
 var ctrlBraintree = require('../controllers/braintreeCtrl');
 var ctrlOrders = require('../controllers/orderCtrl');
-//var auth = require('../Config/auth.js');
+
 
 // authentication
 
@@ -29,7 +26,7 @@ router.post('/login', ctrlAuth.login);
 
 router.get('/Products', ctrlProduct.getProducts);
 router.post('/Products', auth.authent, ctrlProduct.createProduct);
-router.get('/Products/:id', ctrlProduct.editProduct);
+router.get('/Products/:id', auth.authent, ctrlProduct.editProduct);
 router.put('/Products/:id', auth.authent,  ctrlProduct.updateProduct);
 router.delete('/Products/:id', auth.authent, ctrlProduct.deleteProduct);
 

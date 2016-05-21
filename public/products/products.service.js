@@ -11,7 +11,7 @@ angular.module('tigerApp').factory('Product', function($http, $stateParams, Auth
   };
 
   products.getOneProduct = function(id){
-    return $http.get('/api/Products/' + id).success(function(response){
+    return $http.get('/api/Products/' + id, {headers: {Authorization: 'Bearer ' + Auth.getToken()}}).success(function(response){
       console.log(response);
       return response.data;
     })
